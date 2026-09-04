@@ -1,0 +1,35 @@
+<Project Sdk="Microsoft.NET.Sdk">
+
+  <PropertyGroup>
+    <OutputType>Exe</OutputType>
+    <RootNamespace>AkkaTeach.ConsoleApp</RootNamespace>
+    <AssemblyName>AkkaTeach.Console</AssemblyName>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <PackageReference Include="Akka.Hosting" Version="1.5.71" />
+    <PackageReference Include="Microsoft.Extensions.Hosting" Version="10.0.0" />
+    <PackageReference Include="OpenTelemetry.Api" Version="1.18.0" />
+    <PackageReference Include="Serilog.Extensions.Hosting" Version="9.0.0" />
+    <PackageReference Include="Serilog.Sinks.Console" Version="6.0.0" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <ProjectReference Include="..\AkkaTeach.Contracts\AkkaTeach.Contracts.csproj" />
+    <ProjectReference Include="..\AkkaTeach.Core\AkkaTeach.Core.csproj" />
+    <ProjectReference Include="..\AkkaTeach.Worker\AkkaTeach.Worker.csproj">
+      <ExcludeAssets>contentFiles</ExcludeAssets>
+      <PrivateAssets>contentFiles</PrivateAssets>
+    </ProjectReference>
+  </ItemGroup>
+
+  <ItemGroup>
+    <None Update="appsettings.json">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </None>
+    <None Update="appsettings.Development.json">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </None>
+  </ItemGroup>
+
+</Project>
