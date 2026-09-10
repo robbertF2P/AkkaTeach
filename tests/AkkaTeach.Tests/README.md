@@ -17,7 +17,7 @@ when discussing a concept.
           │
    4  how do they change   Become / Unbecome — state as behaviour
           │
-   5  how do they wait     PipeTo — async without blocking the mailbox
+   5  how do they wait     PipeTo · Stash — wait without blocking or dropping work
           │
    6  how does it scale    routers · fan-out/aggregate · injected IO
           │
@@ -30,7 +30,7 @@ when discussing a concept.
 | 2 | [`Phase2_IdentityAndLifecycle`](./Phase2_IdentityAndLifecycle/README.md) | `ActorPath` and the `/user` hierarchy, naming, `ActorSelection`; then `PreStart`/`PostStop`/`PreRestart`/`PostRestart`, restart vs stop, supervision, death watch |
 | 3 | [`Phase3_Messaging`](./Phase3_Messaging/README.md) | `Tell` vs `Ask`, `Sender`, `Self`, actors talking to each other, parent/child delegation |
 | 4 | [`Phase4_BehaviorSwitching`](./Phase4_BehaviorSwitching/README.md) | `Become`/`Unbecome` — modelling state as behaviour instead of `if` chains |
-| 5 | [`Phase5_AsyncWork`](./Phase5_AsyncWork/README.md) | `PipeTo` — doing async work without blocking the mailbox |
+| 5 | [`Phase5_AsyncWork`](./Phase5_AsyncWork/README.md) | `PipeTo` and `Stash` — waiting without blocking the mailbox or dropping valid early messages |
 | 6 | [`Phase6_RoutersAndPipelines`](./Phase6_RoutersAndPipelines/README.md) | Fan-out, aggregation, and the IO boundary behind an injected client |
 | 7 | [`Phase7_Hosting`](./Phase7_Hosting/README.md) | Wiring actors into a .NET host with `Akka.Hosting` and DI |
 

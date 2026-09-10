@@ -11,7 +11,7 @@ namespace AkkaTeach.Core.Actors;
 /// <para><b>Stash pattern:</b> messages arrive before the actor can handle them (warm-up,
 /// loading refs, PipeTo in flight). <c>Stash.Stash()</c> buffers them; <c>UnstashAll()</c>
 /// prepends them to the mailbox in original order when behavior switches.</para>
-/// <para>See guide §18.</para>
+/// <para>See guide §10.</para>
 /// </remarks>
 public sealed class StashGateActor : ReceiveActor, IWithUnboundedStash, IWithTimers
 {

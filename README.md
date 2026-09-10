@@ -4,6 +4,7 @@ A small teaching application that demonstrates core Akka.NET concepts:
 
 - **Actor communication** — coordinators, child actors, and request/reply
 - **Become / Unbecome** — a session actor switches between Idle, Active, and Completed states
+- **Stash** — valid-but-early messages are buffered until an actor is ready
 - **API client + worker pool** — paginated mock API collection processed by a `RoundRobinPool` of workers
 - **Event stream** — domain events published for cross-actor observation
 - **Hosting** — `Akka.Hosting` registers actors in DI; a background worker drives demo traffic
@@ -22,7 +23,7 @@ diagram, so they double as talking points when discussing a concept.
 | 2 | Identity, paths, lifecycle hooks, supervision | [Phase 2](tests/AkkaTeach.Tests/Phase2_IdentityAndLifecycle/README.md) |
 | 3 | Tell vs Ask, Sender, Forward, EventStream | [Phase 3](tests/AkkaTeach.Tests/Phase3_Messaging/README.md) |
 | 4 | Become / Unbecome — state as behaviour | [Phase 4](tests/AkkaTeach.Tests/Phase4_BehaviorSwitching/README.md) |
-| 5 | PipeTo — async without blocking the mailbox | [Phase 5](tests/AkkaTeach.Tests/Phase5_AsyncWork/README.md) |
+| 5 | PipeTo, Stash — waiting without blocking or dropping work | [Phase 5](tests/AkkaTeach.Tests/Phase5_AsyncWork/README.md) |
 | 6 | Routers, fan-out/aggregate, injected IO | [Phase 6](tests/AkkaTeach.Tests/Phase6_RoutersAndPipelines/README.md) |
 | 7 | Akka.Hosting, DI, ActorRegistry | [Phase 7](tests/AkkaTeach.Tests/Phase7_Hosting/README.md) |
 
@@ -142,6 +143,11 @@ See `PeerActorTests.AnyPeer_CanMessageAnyOtherPeer_DirectlyViaIActorRef`.
 ### `DataIngestionActor`
 
 The API-client showcase. Depends on `IDataApiClient` (injected via DI — swap `MockDataApiClient` for `HttpClient` in production). Fetches pages asynchronously with `PipeTo`, fans records out to a router-backed pool, and uses `Become` to track each fetch/process cycle.
+
+### `StashGateActor`
+
+Demonstrates `Stash`: messages that arrive while the actor is waiting for dependencies are kept,
+then `UnstashAll()` replays them in order once the actor becomes ready.
 
 ### `DataRecordWorkerActor`
 

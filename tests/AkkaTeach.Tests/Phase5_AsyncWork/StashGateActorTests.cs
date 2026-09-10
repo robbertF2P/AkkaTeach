@@ -1,16 +1,19 @@
 using Akka.Actor;
 using Akka.Hosting;
-using Akka.Hosting.TestKit;
 using AkkaTeach.Contracts;
 using AkkaTeach.Core.Actors;
 using FluentAssertions;
 
-namespace AkkaTeach.Tests.Actors;
+namespace AkkaTeach.Tests.Phase5_AsyncWork;
 
-public sealed class StashGateActorTests : TestKit
+/// <summary>
+/// Tests that prove <see cref="StashGateActor"/> buffers messages that are valid, but too early.
+/// </summary>
+public sealed class StashGateActorTests(ITestOutputHelper output) : TeachingTestKit(output)
 {
     protected override void ConfigureAkka(AkkaConfigurationBuilder builder, IServiceProvider provider)
     {
+        base.ConfigureAkka(builder, provider);
     }
 
     [Fact]

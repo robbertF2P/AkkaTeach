@@ -1,7 +1,7 @@
-# Phase 5 — Async work without blocking
+# Phase 5 — Waiting without blocking
 
-**Question this phase answers:** the mailbox handles one message at a time — so how do I do slow
-IO without freezing the actor?
+**Question this phase answers:** the mailbox handles one message at a time — so how do I wait
+for slow IO or dependencies without freezing the actor or dropping useful work?
 
 ## The problem
 
@@ -55,10 +55,39 @@ a time, on the actor's own thread. No locks, no race on your fields.
 Map the exception into a normal message (`failure:`) instead of letting it escape. The actor
 decides what a failure means — no restart needed for an expected error.
 
+## Stash: keep valid messages that arrived too early
+
+Sometimes a message is valid, but the actor cannot process it **yet**: dependencies are loading,
+a `PipeTo` operation is in flight, or a child/ref has not been discovered. `Stash.Stash()` stores
+the current message; when the actor becomes ready, `Stash.UnstashAll()` puts those messages back
+on the mailbox in their original order.
+
+```
+Client ──ProcessItem──► Gate (Waiting)
+                           │
+                           │ Stash.Stash()
+                           ▼
+                     [in-memory stash]
+                           │
+              dependencies ready
+                           ▼
+                     Become(Ready)
+                     UnstashAll()
+                           │
+                           ▼
+Client ◄── replies ── ProcessItem handlers (FIFO)
+```
+
+Use stash when early messages should be preserved. Do not use it for long-term storage or messages
+that should simply be rejected.
+
 ## Tests here
 
 `PipeToDemoActorTests` — mailbox stays responsive while a fetch is in flight, and a failing
 service surfaces as a failed-status message rather than a crash.
+
+`StashGateActorTests` — work that arrives before the gate is ready is stashed, then unstashed and
+processed in original order.
 
 ---
 

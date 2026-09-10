@@ -321,7 +321,7 @@ Akka populates `Stash` after construction and switches the actor to a **deque ma
 - On actor restart, stash is cleared; `PreRestart` on stash actors typically calls `UnstashAll()` — design for idempotency
 - Prefer **`IWithUnboundedStash`** unless you explicitly need a bounded stash capacity
 
-**Tests:** `tests/AkkaTeach.Tests/Actors/StashGateActorTests.cs`
+**Tests:** `tests/AkkaTeach.Tests/Phase5_AsyncWork/StashGateActorTests.cs`
 
 ---
 
