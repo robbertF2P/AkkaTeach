@@ -94,6 +94,11 @@ dotnet test tests/AkkaTeach.Tests/AkkaTeach.Tests.csproj
 
 See **[docs/actor-model-guide.md](docs/actor-model-guide.md)** for a topic-by-topic walkthrough of the actor model with code samples and best practices from this repo.
 
+Additional topic guides:
+
+- [Cluster hosting and configuration](docs/cluster-hosting-configuration.md)
+- [Throughput and OpenTelemetry](docs/observability-and-throughput.md)
+
 ## Key actors
 
 ### `PipeToDemoActor`
