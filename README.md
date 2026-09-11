@@ -10,6 +10,10 @@ A small teaching application that demonstrates core Akka.NET concepts:
 - **Hosting** — `Akka.Hosting` registers actors in DI; a background worker drives demo traffic
 - **Logging** — Serilog for the host; Akka's built-in logger adapter inside actors
 
+## Akka.NET resources
+
+- [Akka.NET — The Actor Model for C# and F# | Petabridge](https://petabridge.com/platform/akka-net/)
+
 ## Start here — the learning path
 
 The **tests are the course**, ordered into seven phases. Each phase folder has a README with a

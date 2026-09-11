@@ -1,13 +1,10 @@
 using Akka.Actor;
 using Akka.Hosting;
 using Akka.Hosting.TestKit;
-using Akka.Logger.Serilog;
 using Akka.TestKit;
 using AkkaTeach.Contracts;
 using AkkaTeach.Core.Actors;
 using FluentAssertions;
-using Serilog;
-using Serilog.Sinks.XUnit3;
 
 namespace AkkaTeach.Tests.Phase1_ActorSystemAndCreation;
 
